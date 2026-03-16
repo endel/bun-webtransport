@@ -1,0 +1,5 @@
+node_modules/
+quic-zig/zig-out/
+quic-zig/.zig-cache/
+*.dylib
+*.so

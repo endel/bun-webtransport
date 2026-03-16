@@ -1,0 +1,30 @@
+{
+  "name": "bun-webtransport",
+  "version": "0.0.1",
+  "description": "WebTransport server for Bun, powered by quic-zig",
+  "main": "src/wt.ts",
+  "types": "src/wt.ts",
+  "scripts": {
+    "build": "cd quic-zig && zig build lib -Doptimize=ReleaseFast",
+    "dev": "bun run test-wt.ts"
+  },
+  "files": [
+    "src/",
+    "quic-zig/",
+    "README.md"
+  ],
+  "keywords": [
+    "webtransport",
+    "quic",
+    "bun",
+    "http3",
+    "zig"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "bun-types": "*"
+  },
+  "devDependencies": {
+    "@colyseus/schema": "^4.0.0"
+  }
+}

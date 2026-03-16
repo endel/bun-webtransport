@@ -1,0 +1,3 @@
+[submodule "quic-zig"]
+	path = quic-zig
+	url = git@github.com:endel/quic-zig.git
