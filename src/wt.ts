@@ -17,6 +17,7 @@ const lib = dlopen(LIB_PATH, {
   },
   qz_server_tick: { args: ["ptr"], returns: "i32" },
   qz_server_poll: { args: ["ptr", "ptr", "u32"], returns: "u32" },
+  qz_server_flush: { args: ["ptr"], returns: "void" },
   qz_server_stop: { args: ["ptr"], returns: "void" },
   qz_server_destroy: { args: ["ptr"], returns: "void" },
   qz_server_connection_count: { args: ["ptr"], returns: "u32" },
@@ -167,6 +168,10 @@ export class WebTransportServer {
       if (n === 0) break;
       this.dispatch(n as number);
     }
+    // Flush data queued by handlers or application code (acceptSession,
+    // sendStream, sendDatagram, etc.) so outgoing QUIC packets are built
+    // and sent immediately rather than waiting for the next I/O event.
+    ffi.qz_server_flush(this.server);
   }
 
   private dispatch(_n: number) {

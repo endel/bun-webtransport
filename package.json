@@ -25,6 +25,7 @@
     "bun-types": "*"
   },
   "devDependencies": {
-    "@colyseus/schema": "^4.0.0"
+    "@colyseus/schema": "^4.0.0",
+    "puppeteer-core": "^24.39.1"
   }
 }
