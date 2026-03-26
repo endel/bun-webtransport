@@ -9,27 +9,13 @@ jobs:
   check-version:
     runs-on: ubuntu-latest
     outputs:
-      changed: ${{ steps.version.outputs.changed }}
-      version: ${{ steps.version.outputs.current }}
+      changed: ${{ steps.check.outputs.changed }}
     steps:
       - uses: actions/checkout@v4
+      - uses: EndBug/version-check@v2
+        id: check
         with:
-          fetch-depth: 2
-
-      - name: Check for version change
-        id: version
-        run: |
-          CURRENT=$(python3 -c "import json; print(json.load(open('package.json'))['version'])")
-          PREVIOUS=$(git show HEAD~1:package.json 2>/dev/null | python3 -c "import sys,json; print(json.load(sys.stdin)['version'])" 2>/dev/null || echo "")
-          echo "current=$CURRENT" >> $GITHUB_OUTPUT
-          echo "previous=$PREVIOUS" >> $GITHUB_OUTPUT
-          if [ "$CURRENT" != "$PREVIOUS" ]; then
-            echo "changed=true" >> $GITHUB_OUTPUT
-            echo "Version changed: $PREVIOUS -> $CURRENT"
-          else
-            echo "changed=false" >> $GITHUB_OUTPUT
-            echo "Version unchanged: $CURRENT"
-          fi
+          diff-search: true
 
   publish:
     runs-on: ubuntu-latest
