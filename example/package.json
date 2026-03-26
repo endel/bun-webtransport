@@ -3,6 +3,6 @@
   "private": true,
   "dependencies": {
     "@colyseus/schema": "^4.0.0",
-    "bun-webtransport": "^0.0.4"
+    "bun-webtransport": "^0.0.5"
   }
 }

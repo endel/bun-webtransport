@@ -4,9 +4,18 @@
   "workspaces": {
     "": {
       "name": "bun-webtransport",
+      "dependencies": {
+        "bun-webtransport": "0.0.4",
+      },
       "devDependencies": {
         "@colyseus/schema": "^4.0.0",
         "puppeteer-core": "^24.39.1",
+      },
+      "optionalDependencies": {
+        "bun-webtransport-build-darwin-arm64": "0.0.4",
+        "bun-webtransport-build-darwin-x64": "0.0.4",
+        "bun-webtransport-build-linux-arm64": "0.0.4",
+        "bun-webtransport-build-linux-x64": "0.0.4",
       },
       "peerDependencies": {
         "bun-types": "*",
@@ -51,6 +60,16 @@
     "buffer-crc32": ["buffer-crc32@0.2.13", "", {}, "sha512-VO9Ht/+p3SN7SKWqcrgEzjGbRSJYTx+Q1pTQC0wrWqHx0vpJraQ6GtHx8tvcg1rlK1byhU5gccxgOgj7B0TDkQ=="],
 
     "bun-types": ["bun-types@1.3.10", "", { "dependencies": { "@types/node": "*" } }, "sha512-tcpfCCl6XWo6nCVnpcVrxQ+9AYN1iqMIzgrSKYMB/fjLtV2eyAVEg7AxQJuCq/26R6HpKWykQXuSOq/21RYcbg=="],
+
+    "bun-webtransport": ["bun-webtransport@0.0.4", "", { "optionalDependencies": { "bun-webtransport-build-darwin-arm64": "0.0.4", "bun-webtransport-build-darwin-x64": "0.0.4", "bun-webtransport-build-linux-arm64": "0.0.4", "bun-webtransport-build-linux-x64": "0.0.4" }, "peerDependencies": { "bun-types": "*" } }, "sha512-S0XCld6neD0r8C5WCZerU4Td7CzEAQnYOe4Lcu6YwS9uehIhcMvEo9Gyzl4EOOAdtTkC4Y69MHIgCYNzwbI9eA=="],
+
+    "bun-webtransport-build-darwin-arm64": ["bun-webtransport-build-darwin-arm64@0.0.4", "", { "os": "darwin", "cpu": "arm64" }, "sha512-kqRk0t1BYLse38ZjzDrfdKMU4LMVn3PYNTp1W6+PFi94VxyCWz6Jrbt9DnWTqR+1An0EboKL5l205s4FJ5t+mQ=="],
+
+    "bun-webtransport-build-darwin-x64": ["bun-webtransport-build-darwin-x64@0.0.4", "", { "os": "darwin", "cpu": "x64" }, "sha512-dz9+PGw+k5qZ3zeOblBQuLfspMSoXBmqPGPP8woWPgRnqcgkl3azNZX2590JPyng6j6TRFUCWnKKtxw4XpJRQw=="],
+
+    "bun-webtransport-build-linux-arm64": ["bun-webtransport-build-linux-arm64@0.0.4", "", { "os": "linux", "cpu": "arm64" }, "sha512-7ztVlhz40hxDiuHebYRK/qmnqI8L9BxFeaV2Hcjr0y+eoUWe2T1ZLlklt0DBUMc9TuWisG4eHK12U8qokBcmWQ=="],
+
+    "bun-webtransport-build-linux-x64": ["bun-webtransport-build-linux-x64@0.0.4", "", { "os": "linux", "cpu": "x64" }, "sha512-u+L/ZL1mOHL/+Dt1Gfmfl/N42V7A5oEnaaUqYM0NCj/oyenffSTrqTetVeP3R5hbgvQkjoyPDHunaHIpyrImjg=="],
 
     "chromium-bidi": ["chromium-bidi@14.0.0", "", { "dependencies": { "mitt": "^3.0.1", "zod": "^3.24.1" }, "peerDependencies": { "devtools-protocol": "*" } }, "sha512-9gYlLtS6tStdRWzrtXaTMnqcM4dudNegMXJxkR0I/CXObHalYeYcAMPrL19eroNZHtJ8DQmu1E+ZNOYu/IXMXw=="],
 

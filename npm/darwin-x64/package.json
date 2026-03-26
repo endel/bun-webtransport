@@ -1,6 +1,6 @@
 {
   "name": "bun-webtransport-build-darwin-x64",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Prebuilt quic-zig binary for bun-webtransport (macOS x64)",
   "os": ["darwin"],
   "cpu": ["x64"],
