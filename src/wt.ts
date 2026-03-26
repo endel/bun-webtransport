@@ -9,7 +9,14 @@ import { resolve, dirname } from "path";
 function findLibrary(): string {
   const libName = `libquic-zig.${suffix}`;
 
-  // Try platform-specific npm package first
+  // Prefer local build (development)
+  const local = new URL(
+    `../quic-zig/zig-out/lib/${libName}`,
+    import.meta.url,
+  ).pathname;
+  if (existsSync(local)) return local;
+
+  // Fallback: platform-specific npm package
   const platform = process.platform === "darwin" ? "darwin" : "linux";
   const arch = process.arch === "arm64" ? "arm64" : "x64";
   const pkgName = `bun-webtransport-build-${platform}-${arch}`;
@@ -18,13 +25,6 @@ function findLibrary(): string {
     const candidate = resolve(dirname(pkgPath), libName);
     if (existsSync(candidate)) return candidate;
   } catch {}
-
-  // Fallback: local build (development)
-  const local = new URL(
-    `../quic-zig/zig-out/lib/${libName}`,
-    import.meta.url,
-  ).pathname;
-  if (existsSync(local)) return local;
 
   throw new Error(
     `Could not find ${libName}. Install the platform package (${pkgName}) or run: bun run build`,
