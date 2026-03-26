@@ -1,6 +1,6 @@
 {
   "name": "bun-webtransport-build-linux-x64",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Prebuilt quic-zig binary for bun-webtransport (Linux x64)",
   "os": ["linux"],
   "cpu": ["x64"],
