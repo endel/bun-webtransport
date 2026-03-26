@@ -1,0 +1,34 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "bun-webtransport-example",
+      "dependencies": {
+        "@colyseus/schema": "^4.0.0",
+        "bun-webtransport": "^0.0.4",
+      },
+    },
+  },
+  "packages": {
+    "@colyseus/schema": ["@colyseus/schema@4.0.19", "", { "peerDependencies": { "typescript": "^5.9.3" }, "bin": { "schema-codegen": "bin/schema-codegen", "schema-debug": "bin/schema-debug" } }, "sha512-jU1Jzf5QrA/srjDKcAN/BD1ZkPMuz6LftWGnpyzZE1wjmuOEZTvRfYQJhRd6GLJ+bifnh0DeJnfBRnfR64PyTA=="],
+
+    "@types/node": ["@types/node@25.5.0", "", { "dependencies": { "undici-types": "~7.18.0" } }, "sha512-jp2P3tQMSxWugkCUKLRPVUpGaL5MVFwF8RDuSRztfwgN1wmqJeMSbKlnEtQqU8UrhTmzEmZdu2I6v2dpp7XIxw=="],
+
+    "bun-types": ["bun-types@1.3.11", "", { "dependencies": { "@types/node": "*" } }, "sha512-1KGPpoxQWl9f6wcZh57LvrPIInQMn2TQ7jsgxqpRzg+l0QPOFvJVH7HmvHo/AiPgwXy+/Thf6Ov3EdVn1vOabg=="],
+
+    "bun-webtransport": ["bun-webtransport@0.0.4", "", { "optionalDependencies": { "bun-webtransport-build-darwin-arm64": "0.0.4", "bun-webtransport-build-darwin-x64": "0.0.4", "bun-webtransport-build-linux-arm64": "0.0.4", "bun-webtransport-build-linux-x64": "0.0.4" }, "peerDependencies": { "bun-types": "*" } }, "sha512-S0XCld6neD0r8C5WCZerU4Td7CzEAQnYOe4Lcu6YwS9uehIhcMvEo9Gyzl4EOOAdtTkC4Y69MHIgCYNzwbI9eA=="],
+
+    "bun-webtransport-build-darwin-arm64": ["bun-webtransport-build-darwin-arm64@0.0.4", "", { "os": "darwin", "cpu": "arm64" }, "sha512-kqRk0t1BYLse38ZjzDrfdKMU4LMVn3PYNTp1W6+PFi94VxyCWz6Jrbt9DnWTqR+1An0EboKL5l205s4FJ5t+mQ=="],
+
+    "bun-webtransport-build-darwin-x64": ["bun-webtransport-build-darwin-x64@0.0.4", "", { "os": "darwin", "cpu": "x64" }, "sha512-dz9+PGw+k5qZ3zeOblBQuLfspMSoXBmqPGPP8woWPgRnqcgkl3azNZX2590JPyng6j6TRFUCWnKKtxw4XpJRQw=="],
+
+    "bun-webtransport-build-linux-arm64": ["bun-webtransport-build-linux-arm64@0.0.4", "", { "os": "linux", "cpu": "arm64" }, "sha512-7ztVlhz40hxDiuHebYRK/qmnqI8L9BxFeaV2Hcjr0y+eoUWe2T1ZLlklt0DBUMc9TuWisG4eHK12U8qokBcmWQ=="],
+
+    "bun-webtransport-build-linux-x64": ["bun-webtransport-build-linux-x64@0.0.4", "", { "os": "linux", "cpu": "x64" }, "sha512-u+L/ZL1mOHL/+Dt1Gfmfl/N42V7A5oEnaaUqYM0NCj/oyenffSTrqTetVeP3R5hbgvQkjoyPDHunaHIpyrImjg=="],
+
+    "typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
+
+    "undici-types": ["undici-types@7.18.2", "", {}, "sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w=="],
+  }
+}
