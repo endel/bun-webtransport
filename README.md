@@ -21,11 +21,8 @@ Bun handles HTTP/1.1 + WebSocket. This package adds HTTP/3 + WebTransport by cal
 
 ### Not yet done
 
-- No prebuilt binaries — requires Zig toolchain to build the shared library
-- No browser testing yet (requires valid certs or Chrome's `--ignore-certificate-errors-spki-list`)
 - No backpressure signaling for streams
 - No connection migration support exposed
-- npm publish workflow not set up (submodule + native build complicates distribution)
 
 ## Prerequisites
 
