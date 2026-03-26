@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 /**
- * Publish all platform packages then the main package.
+ * Sync versions across all platform packages, then publish via pnpm.
  * Usage: bun run scripts/publish.ts [--dry-run]
  */
 import { $ } from "bun";
@@ -9,7 +9,6 @@ import { readFileSync } from "fs";
 
 const ROOT = resolve(import.meta.dir, "..");
 const dryRun = process.argv.includes("--dry-run");
-const npmArgs = dryRun ? ["--dry-run"] : [];
 
 const mainPkg = JSON.parse(readFileSync(resolve(ROOT, "package.json"), "utf-8"));
 const version = mainPkg.version;
@@ -26,20 +25,11 @@ for (const p of platforms) {
 
 // Sync optionalDependencies versions in main package
 for (const p of platforms) {
-  const depName = `bun-webtransport-build-${p}`;
-  mainPkg.optionalDependencies[depName] = version;
+  mainPkg.optionalDependencies[`bun-webtransport-build-${p}`] = version;
 }
 await Bun.write(resolve(ROOT, "package.json"), JSON.stringify(mainPkg, null, 2) + "\n");
 
-// Publish platform packages first
-for (const p of platforms) {
-  const dir = resolve(ROOT, "npm", p);
-  console.log(`Publishing bun-webtransport-build-${p}@${version}...`);
-  await $`npm publish --access public ${npmArgs}`.cwd(dir);
-}
-
-// Publish main package
-console.log(`Publishing bun-webtransport@${version}...`);
-await $`npm publish --access public ${npmArgs}`.cwd(ROOT);
+const args = dryRun ? ["--dry-run"] : [];
+await $`pnpm publish -r --access public --no-git-checks ${args}`.cwd(ROOT);
 
 console.log("Done.");
