@@ -1,0 +1,9 @@
+{
+  "name": "bun-webtransport-build-linux-arm64",
+  "version": "0.0.2",
+  "description": "Prebuilt quic-zig binary for bun-webtransport (Linux ARM64)",
+  "os": ["linux"],
+  "cpu": ["arm64"],
+  "files": ["libquic-zig.so"],
+  "license": "MIT"
+}

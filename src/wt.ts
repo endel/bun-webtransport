@@ -1,13 +1,37 @@
 import { dlopen, suffix, ptr } from "bun:ffi";
+import { existsSync } from "fs";
+import { resolve, dirname } from "path";
 
 // ---------------------------------------------------------------------------
 // Load the quic-zig shared library
 // ---------------------------------------------------------------------------
 
-const LIB_PATH = new URL(
-  `../quic-zig/zig-out/lib/libquic-zig.${suffix}`,
-  import.meta.url,
-).pathname;
+function findLibrary(): string {
+  const libName = `libquic-zig.${suffix}`;
+
+  // Try platform-specific npm package first
+  const platform = process.platform === "darwin" ? "darwin" : "linux";
+  const arch = process.arch === "arm64" ? "arm64" : "x64";
+  const pkgName = `bun-webtransport-build-${platform}-${arch}`;
+  try {
+    const pkgPath = require.resolve(`${pkgName}/package.json`);
+    const candidate = resolve(dirname(pkgPath), libName);
+    if (existsSync(candidate)) return candidate;
+  } catch {}
+
+  // Fallback: local build (development)
+  const local = new URL(
+    `../quic-zig/zig-out/lib/${libName}`,
+    import.meta.url,
+  ).pathname;
+  if (existsSync(local)) return local;
+
+  throw new Error(
+    `Could not find ${libName}. Install the platform package (${pkgName}) or run: bun run build`,
+  );
+}
+
+const LIB_PATH = findLibrary();
 
 const lib = dlopen(LIB_PATH, {
   // Server lifecycle

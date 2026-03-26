@@ -1,0 +1,9 @@
+{
+  "name": "bun-webtransport-build-darwin-x64",
+  "version": "0.0.2",
+  "description": "Prebuilt quic-zig binary for bun-webtransport (macOS x64)",
+  "os": ["darwin"],
+  "cpu": ["x64"],
+  "files": ["libquic-zig.dylib"],
+  "license": "MIT"
+}

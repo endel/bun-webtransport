@@ -1,0 +1,9 @@
+{
+  "name": "bun-webtransport-build-linux-x64",
+  "version": "0.0.2",
+  "description": "Prebuilt quic-zig binary for bun-webtransport (Linux x64)",
+  "os": ["linux"],
+  "cpu": ["x64"],
+  "files": ["libquic-zig.so"],
+  "license": "MIT"
+}

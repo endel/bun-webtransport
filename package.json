@@ -1,16 +1,15 @@
 {
   "name": "bun-webtransport",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "WebTransport server for Bun, powered by quic-zig",
   "main": "src/wt.ts",
   "types": "src/wt.ts",
   "scripts": {
-    "build": "cd quic-zig && zig build lib -Doptimize=ReleaseFast",
+    "build": "bun run scripts/build.ts",
     "dev": "bun run test-wt.ts"
   },
   "files": [
     "src/",
-    "quic-zig/",
     "README.md"
   ],
   "keywords": [
@@ -21,6 +20,12 @@
     "zig"
   ],
   "license": "MIT",
+  "optionalDependencies": {
+    "bun-webtransport-build-darwin-arm64": "0.0.2",
+    "bun-webtransport-build-darwin-x64": "0.0.2",
+    "bun-webtransport-build-linux-arm64": "0.0.2",
+    "bun-webtransport-build-linux-x64": "0.0.2"
+  },
   "peerDependencies": {
     "bun-types": "*"
   },

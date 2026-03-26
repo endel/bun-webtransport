@@ -1,0 +1,71 @@
+name: Build & Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to publish (e.g. 0.1.0)"
+        required: true
+      dry-run:
+        description: "Dry run (no actual publish)"
+        type: boolean
+        default: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: goto-bus-stop/setup-zig@v2
+        with:
+          version: 0.14.1
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Set version
+        run: |
+          bun -e "
+            const fs = require('fs');
+            const version = '${{ inputs.version }}';
+            const platforms = ['darwin-arm64', 'darwin-x64', 'linux-arm64', 'linux-x64'];
+
+            // Update main package.json
+            const main = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
+            main.version = version;
+            for (const p of platforms) {
+              main.optionalDependencies['bun-webtransport-build-' + p] = version;
+            }
+            fs.writeFileSync('package.json', JSON.stringify(main, null, 2) + '\n');
+
+            // Update platform packages
+            for (const p of platforms) {
+              const path = 'npm/' + p + '/package.json';
+              const pkg = JSON.parse(fs.readFileSync(path, 'utf-8'));
+              pkg.version = version;
+              fs.writeFileSync(path, JSON.stringify(pkg, null, 2) + '\n');
+            }
+          "
+
+      - name: Cross-compile all platforms
+        run: bun run scripts/build.ts
+
+      - name: Publish platform packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+          DRY=${{ inputs.dry-run && '--dry-run' || '' }}
+          for dir in npm/darwin-arm64 npm/darwin-x64 npm/linux-arm64 npm/linux-x64; do
+            (cd "$dir" && npm publish --access public $DRY)
+          done
+
+      - name: Publish main package
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+          DRY=${{ inputs.dry-run && '--dry-run' || '' }}
+          npm publish --access public $DRY
