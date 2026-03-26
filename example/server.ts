@@ -332,6 +332,14 @@ function update() {
   const now = Date.now();
   let winner: number | null = null;
 
+  // ── Evict disconnected players ──
+  for (const [clientId, player] of players) {
+    if (!server.isClientConnected(clientId)) {
+      console.log(`[disconnected] ${player.sessionId} connection closed`);
+      removePlayer(clientId);
+    }
+  }
+
   // ── Tanks ──
   for (const [sid, tank] of tankData) {
     if (tank.deleted) continue;

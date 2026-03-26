@@ -45,6 +45,7 @@ const lib = dlopen(LIB_PATH, {
   qz_server_stop: { args: ["ptr"], returns: "void" },
   qz_server_destroy: { args: ["ptr"], returns: "void" },
   qz_server_connection_count: { args: ["ptr"], returns: "u32" },
+  qz_is_client_connected: { args: ["ptr", "u64"], returns: "i32" },
 
   // Session management
   qz_session_accept: { args: ["ptr", "u64", "u64"], returns: "i32" },
@@ -351,6 +352,10 @@ export class WebTransportServer {
 
   get connectionCount(): number {
     return ffi.qz_server_connection_count(this.server) as number;
+  }
+
+  isClientConnected(clientId: bigint): boolean {
+    return ffi.qz_is_client_connected(this.server, clientId) !== 0;
   }
 
   stop(): void {
